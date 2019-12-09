@@ -10,24 +10,22 @@ function App() {
   const [away, awayScore] = useState(0);
 
   //functions
-  const homeTouchDown = e => {
+  const homeTouchDown = () => {
     homeScore(home + 7);
   };
-  const homeFieldGoal = e => {
+  const homeFieldGoal = () => {
     homeScore(home + 3);
   };
 
-  const awayTouchDown = e => {
+  const awayTouchDown = () => {
     awayScore(away + 7);
   };
-  const awayFieldGoal = e => {
+  const awayFieldGoal = () => {
     awayScore(away + 3);
   };
 
-  const [quarter, quarterValue] = useState(1);
-  const quarterChange = e => {
-    quarterValue(quarter + 1);
-  }
+  const [quarter, setQuarter] = useState(1);
+ 
 
   return (
     <div className="container">
@@ -40,13 +38,13 @@ function App() {
 
   <div className="home__score">{home}</div>
           </div>
-          <div className="timer">00:03</div>
+  <div className="timer">00:03</div>
           <div className="away">
             <h2 className="away__name">Tigers</h2>
   <div className="away__score">{away}</div>
           </div>
         </div>
-        <BottomRow />
+        <BottomRow quarter={quarter}/>
       </section>
       <section className="buttons">
         <div className="homeButtons">
@@ -59,7 +57,13 @@ function App() {
           <button onClick={awayFieldGoal} className="awayButtons__fieldGoal">Away Field Goal</button>
         </div>
         <div>
-          <button onClick={quarterChange}>QUARTER</button>
+          <button onClick={() =>{ 
+            if(quarter < 4){
+              setQuarter(quarter + 1) 
+            }
+             }}
+            >QUARTER
+            </button>
         </div>
       </section>
     </div>
